@@ -23,13 +23,20 @@ int& trouverMax(int* arr, int n) {
 }
 
 void inverser(int* arr, int n) {
-    for (int i = 0; i < n / 2; i++) {
-        int temp = *(arr + i);
-        *(arr + i) = *(arr + n - 1 - i);
-        *(arr + n - 1 - i) = temp;
+    int* debut = arr;           // Pointeur vers premier élément
+    int* fin = arr + n - 1;     // Pointeur vers dernier élément
+    
+    while (debut < fin) {       // Continue tant que debut avant fin
+        // ÉCHANGE les valeurs pointées
+        int temp = *debut;      // Garde valeur de debut dans temp
+        *debut = *fin;          // Met valeur de fin à la place debut
+        *fin = temp;            // Met ancienne valeur debut à fin
+        
+        // DÉPLACE les pointeurs
+        debut++;  // Va vers la droite
+        fin--;    // Va vers la gauche
     }
 }
-
 int main() {
     int n;
     cout << "Entrer la taille du tableau : ";
@@ -55,4 +62,5 @@ int main() {
     
     delete[] arr;
     return 0;
+
 }
