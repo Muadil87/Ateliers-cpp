@@ -26,15 +26,15 @@ void inverser(int* arr, int n) {
     int* debut = arr;           // Pointeur vers premier élément
     int* fin = arr + n - 1;     // Pointeur vers dernier élément
     
-    while (debut < fin) {       // Continue tant que debut avant fin
+    while (debut < fin) {       
         // ÉCHANGE les valeurs pointées
-        int temp = *debut;      // Garde valeur de debut dans temp
-        *debut = *fin;          // Met valeur de fin à la place debut
-        *fin = temp;            // Met ancienne valeur debut à fin
+        int temp = *debut;      
+        *debut = *fin;          
+        *fin = temp;            
         
         // DÉPLACE les pointeurs
-        debut++;  // Va vers la droite
-        fin--;    // Va vers la gauche
+        debut++;  
+        fin--;    
     }
 }
 int main() {
@@ -64,3 +64,4 @@ int main() {
     return 0;
 
 }
+
