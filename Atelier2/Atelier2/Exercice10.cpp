@@ -1,54 +1,59 @@
 #include <iostream>
+#include <string>
 #include <cmath>
 using namespace std;
 
-class NombreComplexe {
+class nbr_cpmlx {
 private:
     float reel;
-    float imaginaire;
-
+    float imag;
 public:
-    NombreComplexe(float r = 0, float i = 0) : reel(r), imaginaire(i) {}
+    // Constructeurs
+    nbr_cpmlx(float r = 0, float i = 0) {
+        reel = r;
+        imag = i;
+    }
     
     void afficher() {
-        if (imaginaire >= 0)
-            cout << reel << " + " << imaginaire << "i";
+        if (imag >= 0)
+            cout << reel << " + " << imag << "i";
         else
-            cout << reel << " - " << -imaginaire << "i";
+            cout << reel << " - " << -imag << "i";
     }
     
-    NombreComplexe addition(const NombreComplexe& c) {
-        return NombreComplexe(reel + c.reel, imaginaire + c.imaginaire);
+    // Méthodes qui retournent de nouveaux objets (ne modifient pas l'original)
+    nbr_cpmlx addition(nbr_cpmlx c) {
+        return nbr_cpmlx(reel + c.reel, imag + c.imag);
     }
     
-    NombreComplexe soustraction(const NombreComplexe& c) {
-        return NombreComplexe(reel - c.reel, imaginaire - c.imaginaire);
+    nbr_cpmlx soustraction(nbr_cpmlx c) {
+        return nbr_cpmlx(reel - c.reel, imag - c.imag);
     }
     
-    NombreComplexe multiplication(const NombreComplexe& c) {
-        float r = reel * c.reel - imaginaire * c.imaginaire;
-        float i = reel * c.imaginaire + imaginaire * c.reel;
-        return NombreComplexe(r, i);
+    nbr_cpmlx multiplication(nbr_cpmlx c) {
+        float r = reel * c.reel - imag * c.imag;
+        float i = reel * c.imag + imag * c.reel;
+        return nbr_cpmlx(r, i);
     }
     
-    NombreComplexe division(const NombreComplexe& c) {
-        float denom = c.reel * c.reel + c.imaginaire * c.imaginaire;
+    nbr_cpmlx division(nbr_cpmlx c) {
+        float denom = c.reel * c.reel + c.imag * c.imag;
         if (denom == 0) {
             cout << "Erreur: Division par zero!" << endl;
-            return NombreComplexe(0, 0);
+            return nbr_cpmlx(0, 0);
         }
-        float r = (reel * c.reel + imaginaire * c.imaginaire) / denom;
-        float i = (imaginaire * c.reel - reel * c.imaginaire) / denom;
-        return NombreComplexe(r, i);
+        float r = (reel * c.reel + imag * c.imag) / denom;
+        float i = (imag * c.reel - reel * c.imag) / denom;
+        return nbr_cpmlx(r, i);
     }
     
-    bool egalite(const NombreComplexe& c) {
-        return (reel == c.reel && imaginaire == c.imaginaire);
+    bool egalite(nbr_cpmlx c) {
+        return (reel == c.reel && imag == c.imag);
     }
 };
 
 void afficherMenu() {
-    cout << "\n=== CALCULATRICE NOMBRES COMPLEXES ===" << endl;
+    cout << "\n=== MENU OPERATIONS COMPLEXES ===" << endl;
     cout << "1. Addition" << endl;
     cout << "2. Soustraction" << endl;
     cout << "3. Multiplication" << endl;
@@ -63,6 +68,7 @@ int main() {
     int choix;
     
     do {
+        // Saisie des nombres complexes
         cout << "\n--- Premier nombre complexe ---" << endl;
         cout << "Partie reelle: ";
         cin >> r1;
@@ -75,10 +81,11 @@ int main() {
         cout << "Partie imaginaire: ";
         cin >> i2;
         
-        NombreComplexe c1(r1, i1);
-        NombreComplexe c2(r2, i2);
-        NombreComplexe resultat;
+        nbr_cpmlx c1(r1, i1);
+        nbr_cpmlx c2(r2, i2);
+        nbr_cpmlx resultat;
         
+        // Affichage des nombres
         cout << "\nNombres saisis:" << endl;
         cout << "c1 = "; c1.afficher(); cout << endl;
         cout << "c2 = "; c2.afficher(); cout << endl;
@@ -89,33 +96,54 @@ int main() {
         switch(choix) {
             case 1:
                 resultat = c1.addition(c2);
-                cout << "Addition: "; c1.afficher(); cout << " + "; c2.afficher();
+                cout << "\nAddition: ";
+                c1.afficher(); cout << " + "; c2.afficher(); 
                 cout << " = "; resultat.afficher(); cout << endl;
                 break;
+                
             case 2:
                 resultat = c1.soustraction(c2);
-                cout << "Soustraction: "; c1.afficher(); cout << " - "; c2.afficher();
+                cout << "\nSoustraction: ";
+                c1.afficher(); cout << " - "; c2.afficher(); 
                 cout << " = "; resultat.afficher(); cout << endl;
                 break;
+                
             case 3:
                 resultat = c1.multiplication(c2);
-                cout << "Multiplication: "; c1.afficher(); cout << " * "; c2.afficher();
+                cout << "\nMultiplication: ";
+                c1.afficher(); cout << " * "; c2.afficher(); 
                 cout << " = "; resultat.afficher(); cout << endl;
                 break;
+                
             case 4:
                 resultat = c1.division(c2);
-                cout << "Division: "; c1.afficher(); cout << " / "; c2.afficher();
+                cout << "\nDivision: ";
+                c1.afficher(); cout << " / "; c2.afficher(); 
                 cout << " = "; resultat.afficher(); cout << endl;
                 break;
+                
             case 5:
-                cout << "Egalite: "; c1.afficher(); cout << " et "; c2.afficher();
-                cout << " sont " << (c1.egalite(c2) ? "EGAUX" : "DIFFERENTS") << endl;
+                cout << "\nEgalite: ";
+                c1.afficher(); cout << " et "; c2.afficher();
+                if (c1.egalite(c2))
+                    cout << " sont EGAUX" << endl;
+                else
+                    cout << " sont DIFFERENTS" << endl;
                 break;
+                
             case 6:
                 cout << "Au revoir!" << endl;
                 break;
+                
             default:
                 cout << "Choix invalide!" << endl;
+                break;
+        }
+        
+        if (choix != 6) {
+            cout << "\nAppuyez sur Entree pour continuer...";
+            cin.ignore();
+            cin.get();
         }
         
     } while (choix != 6);
