@@ -1,124 +1,63 @@
-#include <iostream>
-#include <cmath>
+#include<iostream>
+#include<string>
 using namespace std;
-
-class NombreComplexe {
-private:
-    float reel;
-    float imaginaire;
-
-public:
-    NombreComplexe(float r = 0, float i = 0) : reel(r), imaginaire(i) {}
-    
-    void afficher() {
-        if (imaginaire >= 0)
-            cout << reel << " + " << imaginaire << "i";
-        else
-            cout << reel << " - " << -imaginaire << "i";
-    }
-    
-    NombreComplexe addition(const NombreComplexe& c) {
-        return NombreComplexe(reel + c.reel, imaginaire + c.imaginaire);
-    }
-    
-    NombreComplexe soustraction(const NombreComplexe& c) {
-        return NombreComplexe(reel - c.reel, imaginaire - c.imaginaire);
-    }
-    
-    NombreComplexe multiplication(const NombreComplexe& c) {
-        float r = reel * c.reel - imaginaire * c.imaginaire;
-        float i = reel * c.imaginaire + imaginaire * c.reel;
-        return NombreComplexe(r, i);
-    }
-    
-    NombreComplexe division(const NombreComplexe& c) {
-        float denom = c.reel * c.reel + c.imaginaire * c.imaginaire;
-        if (denom == 0) {
-            cout << "Erreur: Division par zero!" << endl;
-            return NombreComplexe(0, 0);
-        }
-        float r = (reel * c.reel + imaginaire * c.imaginaire) / denom;
-        float i = (imaginaire * c.reel - reel * c.imaginaire) / denom;
-        return NombreComplexe(r, i);
-    }
-    
-    bool egalite(const NombreComplexe& c) {
-        return (reel == c.reel && imaginaire == c.imaginaire);
-    }
+class vecteur3d {
+	private:
+	float x, y, z;
+	public:
+		void vecteur() {}
+		void afficher(float a, float b, float c) {
+			x = a;
+			y = b;
+			z = c;
+			cout<<"Vecteur cree: ("<<x<<","<<y<<","<<z<<")"<<endl;
+		}
+		void somme(float a, float b, float c) {
+			x += a;
+			y += b;
+			z += c;
+			cout<<"Somme: ("<<x<<","<<y<<","<<z<<")"<<endl;
+		}
+		void produit_scalaire(float a, float b, float c) {
+			float produit = x * a + y * b + z * c;
+			cout<<"Produit scalaire: "<<produit<<endl;
+		}
+		void coincide(float a, float b, float c) {
+			if (x == a && y == b && z == c) {
+				cout<<"Les vecteurs coincident."<<endl;
+			} else {
+				cout<<"Les vecteurs ne coincident pas."<<endl;
+			}
+		}
+		float norme(float a,float b,float c) {
+			float norme1 = sqrt(x * x + y * y + z * z);
+			float norme2 = sqrt(a * a + b * b + c * c);
+			return norme1, norme2;
+		}
+		void normax(float norme1,float norme2) {
+			if (norme1 > norme2) {
+				cout<<"Le plus grande norme est: "<<norme1<<endl;
+			} else if (norme2 > norme1) {
+				cout<<"Le plus grande norme est:"<<norme2<<endl;
+			} else 
+				cout<<"Les deux vecteurs ont la meme norme."<<endl;
+			}
 };
+		int main() {
+			vecteur3d v1, v2;
+			float x1, y1, z1, x2, y2, z2;
+			cout<<"Entrez les composantes du premier vecteur (x y z): ";
+			cin>>x1>>y1>>z1;
+			v1.afficher(x1, y1, z1);
+			cout<<"Entrez les composantes du deuxieme vecteur (x y z): ";
+			cin>>x2>>y2>>z2;
+			v2.afficher(x2, y2, z2);
+			v1.somme(x2, y2, z2);
+			v1.produit_scalaire(x2, y2, z2);
+			v1.coincide(x2, y2, z2);
+			float norme1 = v1.norme(x1, y1, z1);
+			float norme2 = v2.norme(x2, y2, z2);
+			v1.normax(norme1, norme2);
 
-void afficherMenu() {
-    cout << "\n=== CALCULATRICE NOMBRES COMPLEXES ===" << endl;
-    cout << "1. Addition" << endl;
-    cout << "2. Soustraction" << endl;
-    cout << "3. Multiplication" << endl;
-    cout << "4. Division" << endl;
-    cout << "5. Egalite" << endl;
-    cout << "6. Quitter" << endl;
-    cout << "Votre choix: ";
-}
-
-int main() {
-    float r1, i1, r2, i2;
-    int choix;
-    
-    do {
-        cout << "\n--- Premier nombre complexe ---" << endl;
-        cout << "Partie reelle: ";
-        cin >> r1;
-        cout << "Partie imaginaire: ";
-        cin >> i1;
-        
-        cout << "\n--- Deuxieme nombre complexe ---" << endl;
-        cout << "Partie reelle: ";
-        cin >> r2;
-        cout << "Partie imaginaire: ";
-        cin >> i2;
-        
-        NombreComplexe c1(r1, i1);
-        NombreComplexe c2(r2, i2);
-        NombreComplexe resultat;
-        
-        cout << "\nNombres saisis:" << endl;
-        cout << "c1 = "; c1.afficher(); cout << endl;
-        cout << "c2 = "; c2.afficher(); cout << endl;
-        
-        afficherMenu();
-        cin >> choix;
-        
-        switch(choix) {
-            case 1:
-                resultat = c1.addition(c2);
-                cout << "Addition: "; c1.afficher(); cout << " + "; c2.afficher();
-                cout << " = "; resultat.afficher(); cout << endl;
-                break;
-            case 2:
-                resultat = c1.soustraction(c2);
-                cout << "Soustraction: "; c1.afficher(); cout << " - "; c2.afficher();
-                cout << " = "; resultat.afficher(); cout << endl;
-                break;
-            case 3:
-                resultat = c1.multiplication(c2);
-                cout << "Multiplication: "; c1.afficher(); cout << " * "; c2.afficher();
-                cout << " = "; resultat.afficher(); cout << endl;
-                break;
-            case 4:
-                resultat = c1.division(c2);
-                cout << "Division: "; c1.afficher(); cout << " / "; c2.afficher();
-                cout << " = "; resultat.afficher(); cout << endl;
-                break;
-            case 5:
-                cout << "Egalite: "; c1.afficher(); cout << " et "; c2.afficher();
-                cout << " sont " << (c1.egalite(c2) ? "EGAUX" : "DIFFERENTS") << endl;
-                break;
-            case 6:
-                cout << "Au revoir!" << endl;
-                break;
-            default:
-                cout << "Choix invalide!" << endl;
-        }
-        
-    } while (choix != 6);
-    
-    return 0;
-}
+			return 0;
+		}
