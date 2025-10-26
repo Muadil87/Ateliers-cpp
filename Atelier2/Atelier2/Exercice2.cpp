@@ -1,25 +1,30 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
+int multiple2(int n) {
+	if (n % 2 == 0) {
+		return 1;
+	}
+	else return 0;
 
+}
+int multiple3(int n) {
+	if (n % 3 == 0)
+		return 1;
+	else
+		return 0;
+}
 int main() {
-    const int TAILLE = 10;
-    int tab[TAILLE];
-    
-    cout << "Entrez " << TAILLE << " nombres entiers : ";
-    for (int i = 0; i < TAILLE; i++) {
-        cin >> tab[i];
-    }
-    
-    int min = tab[0];
-    int max = tab[0];
-    
-    for (int i = 1; i < TAILLE; i++) {
-        if (tab[i] < min) min = tab[i];
-        if (tab[i] > max) max = tab[i];
-    }
-    
-    cout << "Plus petit : " << min << endl;
-    cout << "Plus grand : " << max << endl;
-    
-    return 0;
+	int n, n2, n3;
+	cout << "entrer un nombre entier :";
+	cin >> n;
+	n2 = multiple2(n);
+	n3 = multiple3(n);
+	if (n2 == 1)
+		cout << "il est paire" << endl;
+    if (n3 == 1) 
+		cout << "il est multiple de 3" << endl;
+	
+	if (n2 == 1 && n3 == 1)
+		cout << "il est divisible par 6" << endl;
+	return 0;
 }
