@@ -1,67 +1,51 @@
 #include<iostream>
-#include<cmath>
+#include<string>
 using namespace std;
-
-class Vecteur3D {
-private:
-    float x, y, z;
-
+class Voiture {
 public:
-    Vecteur3D(float a = 0, float b = 0, float c = 0) : x(a), y(b), z(c) {}
-    
-    void afficher() {
-        cout << "(" << x << ", " << y << ", " << z << ")" << endl;
-    }
-    
-    Vecteur3D somme(const Vecteur3D& v) {
-        return Vecteur3D(x + v.x, y + v.y, z + v.z);
-    }
-    
-    float produitScalaire(const Vecteur3D& v) {
-        return x * v.x + y * v.y + z * v.z;
-    }
-    
-    bool coincide(const Vecteur3D& v) {
-        return (x == v.x && y == v.y && z == v.z);
-    }
-    
-    float norme() {
-        return sqrt(x*x + y*y + z*z);
-    }
-    
-    Vecteur3D normax(Vecteur3D& v) {
-        if (this->norme() > v.norme()) {
-            return *this;
-        } else {
-            return v;
-        }
-    }
+	string marque;
+	string modele;
+	int annee;
+	float kilometrage;
+	float vitesse;
+	void Voiture() {
+	}
+	void Voiture(string m, string mo, int a, float k, float v) {
+		marque = m;
+		modele = mo;
+		annee = a;
+		kilometrage = k;
+		vitesse = v;
+	}
+	void accelerer(float v) {
+		vitesse = vitesse + v;
+	}
+	void freiner(float v) {
+		if (vitesse > 0) 
+			vitesse -= v;
+		vitesse==0;
+	}
+	void afficher() {
+		cout << "Marque: " << marque << endl;
+		cout << "Modele: " << modele << endl;
+		cout << "Annee: " << annee << endl;
+		cout << "Kilometrage: " << kilometrage << endl;
+		cout << "Vitesse: " << vitesse << endl;
+	}
+	void avancer(float distance) {
+		kilometrage += distance;
+		cout<< "La voiture a avance de " << distance << " km." << endl;
+	 
+	}
+	~Voiture() {
+		cout << "Voiture détruite." << endl;
+	}
 };
 
 int main() {
-    Vecteur3D v1(1, 2, 3);
-    Vecteur3D v2(4, 5, 6);
-    
-    cout << "Vecteur 1: ";
-    v1.afficher();
-    
-    cout << "Vecteur 2: ";
-    v2.afficher();
-    
-    Vecteur3D somme = v1.somme(v2);
-    cout << "Somme: ";
-    somme.afficher();
-    
-    cout << "Produit scalaire: " << v1.produitScalaire(v2) << endl;
-    
-    cout << "Coincident: " << (v1.coincide(v2) ? "Oui" : "Non") << endl;
-    
-    cout << "Norme v1: " << v1.norme() << endl;
-    cout << "Norme v2: " << v2.norme() << endl;
-    
-    Vecteur3D plusGrand = v1.normax(v2);
-    cout << "Vecteur avec la plus grande norme: ";
-    plusGrand.afficher();
-    
-    return 0;
+	Voiture v; 
+	v.Voiture("Toyota", "Corolla", 2020, 15000.0, 0.0);
+	v.afficher();
+	v.accelerer(50.0);
+	return 0;
 }
