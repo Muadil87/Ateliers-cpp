@@ -2,32 +2,26 @@
 using namespace std;
 
 int main() {
-    int taille;
+    const int TAILLE = 10;
+    int tab[TAILLE];
     
-    cout << "Entrez la taille du tableau : ";
-    cin >> taille;
-    
-    int* tab1 = new int[taille];
-    
-    cout << "Entrez " << taille << " nombres entiers : ";
-    for (int i = 0; i < taille; i++) {
-        cin >> tab1[i];
+    // Lecture avec pointeurs
+    cout << "Entrez " << TAILLE << " nombres entiers : ";
+    for (int* p = tab; p < tab + TAILLE; p++) {
+        cin >> *p;
     }
     
-    int* tab2 = new int[taille];
-    for (int i = 0; i < taille; i++) {
-        tab2[i] = tab1[i] * tab1[i];
+    // Recherche min et max avec pointeurs
+    int* p_min = tab;
+    int* p_max = tab;
+    
+    for (int* p = tab + 1; p < tab + TAILLE; p++) {
+        if (*p < *p_min) p_min = p;
+        if (*p > *p_max) p_max = p;
     }
     
-    delete[] tab1;
-    
-    cout << "Carres des nombres : ";
-    for (int i = 0; i < taille; i++) {
-        cout << tab2[i] << " ";
-    }
-    cout << endl;
-    
-    delete[] tab2;
+    cout << "Plus petit : " << *p_min << endl;
+    cout << "Plus grand : " << *p_max << endl;
     
     return 0;
 }
