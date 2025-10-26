@@ -1,23 +1,41 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 int main() {
-    int a = 10;
-    int& ref_a = a;
-    int* p_a = &a;
+    int taille;
     
-    cout << "Variable a :" << endl;
-    cout << "  Valeur : " << a << endl;
-    cout << "  Adresse : " << &a << endl << endl;
+    // 1. Allocation du premier tableau
+    cout << "Entrez la taille du tableau : ";
+    cin >> taille;
     
-    cout << "Reference ref_a :" << endl;
-    cout << "  Valeur : " << ref_a << endl;
-    cout << "  Adresse : " << &ref_a << endl << endl;
+    int* tab1 = new int[taille];
     
-    cout << "Pointeur p_a :" << endl;
-    cout << "  Valeur (adresse stockee) : " << p_a << endl;
-    cout << "  Adresse du pointeur : " << &p_a << endl;
-    cout << "  Valeur pointee : " << *p_a << endl;
+    // Lecture des valeurs
+    cout << "Entrez " << taille << " nombres entiers : ";
+    for (int i = 0; i < taille; i++) {
+        cin >> tab1[i];
+    }
+    
+    // 2. Allocation du deuxième tableau pour les carrés
+    int* tab2 = new int[taille];
+    
+    // Calcul des carrés
+    for (int i = 0; i < taille; i++) {
+        tab2[i] = tab1[i] * tab1[i];
+    }
+    
+    // 3. Suppression du premier tableau
+    delete[] tab1;
+    
+    // Affichage du deuxième tableau
+    cout << "Carrés des nombres : ";
+    for (int i = 0; i < taille; i++) {
+        cout << tab2[i] << " ";
+    }
+    cout << endl;
+    
+    // Suppression du deuxième tableau
+    delete[] tab2;
     
     return 0;
 }
