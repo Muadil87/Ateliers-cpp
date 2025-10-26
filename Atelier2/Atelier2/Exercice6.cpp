@@ -1,40 +1,48 @@
 #include <iostream>
 using namespace std;
 
-void afficherPermutations(char* chaine, int debut, int fin) {
-    if (debut == fin) {
-        for (int i = 0; i <= fin; i++) {
-            cout << chaine[i];
-        }
-        cout << endl;
-    } else {
-        for (int i = debut; i <= fin; i++) {
-            char temp = chaine[debut];
-            chaine[debut] = chaine[i];
-            chaine[i] = temp;
-            
-            afficherPermutations(chaine, debut + 1, fin);
-            
-            temp = chaine[debut];
-            chaine[debut] = chaine[i];
-            chaine[i] = temp;
-        }
-    }
+// Version avec pointeurs (style C)
+void incrementer(int* x) {
+    (*x)++;
+}
+
+void permuter(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// Version avec références (style C++)
+void incrementer(int& x) {
+    x++;
+}
+
+void permuter(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
 }
 
 int main() {
-    char chaine[100];
+    // Test avec pointeurs
+    cout << " Version avec pointeurs" << endl;
+    int x = 5, y = 10;
+    cout << "Avant : x = " << x << ", y = " << y << endl;
     
-    cout << "Entrez une chaine de caracteres : ";
-    cin >> chaine;
+    incrementer(&x);
+    permuter(&x, &y);
     
-    int longueur = 0;
-    while (chaine[longueur] != '\0') {
-        longueur++;
-    }
+    cout << "Après : x = " << x << ", y = " << y << endl;
     
-    cout << "\nPermutations possibles :" << endl;
-    afficherPermutations(chaine, 0, longueur - 1);
+    // Test avec références
+    cout << "\n Version avec références" << endl;
+    int a = 5, b = 10;
+    cout << "Avant : a = " << a << ", b = " << b << endl;
+    
+    incrementer(a);
+    permuter(a, b);
+    
+    cout << "Après : a = " << a << ", b = " << b << endl;
     
     return 0;
 }
