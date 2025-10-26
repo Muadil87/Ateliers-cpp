@@ -5,21 +5,24 @@ int main() {
     const int TAILLE = 10;
     int tab[TAILLE];
     
+    // Lecture
     cout << "Entrez " << TAILLE << " nombres entiers : ";
-    for (int* p = tab; p < tab + TAILLE; p++) {
-        cin >> *p;
+    for (int i = 0; i < TAILLE; i++) {
+        cin >> tab[i];
     }
     
-    int* p_min = tab;
-    int* p_max = tab;
+    // Recherche min et max
+    int min = tab[0];
+    int max = tab[0];
     
-    for (int* p = tab + 1; p < tab + TAILLE; p++) {
-        if (*p < *p_min) p_min = p;
-        if (*p > *p_max) p_max = p;
+    for (int i = 1; i < TAILLE; i++) {
+        if (tab[i] < min) min = tab[i];
+        if (tab[i] > max) max = tab[i];
     }
     
-    cout << "Plus petit : " << *p_min << endl;
-    cout << "Plus grand : " << *p_max << endl;
+    cout << "Plus petit : " << min << endl;
+    cout << "Plus grand : " << max << endl;
     
     return 0;
+}
 }
