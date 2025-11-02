@@ -1,0 +1,12 @@
+Copie superficielle : copie les pointeurs, pas les données.
+Copie profonde : copie aussi les données, crée de nouveaux objets.
+→ Nécessaire ici pour éviter que deux comptes partagent le même client.
+
+Variable statique : partagée par toutes les instances, sert à compter les objets créés.
+
+Méthode normale : agit sur un objet précis.
+Méthode statique : ne dépend pas d’un objet, s’appelle sans instance.
+
+Fonction inline : utile pour petites fonctions, évite le coût d’appel, plus rapide.
+
+Oubli de libération : cause fuite mémoire, la mémoire n’est jamais rendue.
