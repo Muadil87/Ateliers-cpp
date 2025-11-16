@@ -1,0 +1,4 @@
+Problème avec les instructions :
+point<char> p(60, 65); p.affiche(); affiche Coordonnees : < 60 > (car 60 est '<' en ASCII, 65 est 'A').
+Modification pour afficher correctement :
+Changez void affiche() pour caster en int : cout << "Coordonnees : " << (int)x << " " << (int)y << "\n";

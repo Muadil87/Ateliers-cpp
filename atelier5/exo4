@@ -1,0 +1,6 @@
+Résultats du Programme avec Héritage Multiple
+Analyse des sorties :
+Pour C c1; : Construit B avec v=0, puis A avec p=2, puis C avec n=3, p=1+2=3.
+Sortie : construction objet B : 1 0 puis  construction objet A : 2 1 puis  construction objet C : 3 3.
+Pour C c2(10, 11, 12, 5.0); : Construit B avec v=5.0, puis A avec p=10, puis C avec n=12, p=10+11=21.
+Sortie : construction objet B : 1 5 puis  construction objet A : 10 1 puis  construction objet C : 12 21.
